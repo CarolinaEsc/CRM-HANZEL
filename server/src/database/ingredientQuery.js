@@ -1,0 +1,8 @@
+export const ingredientQueries = {
+    getAllIngredient: "SELECT I.[IngredientID] as ingredientID, I.[name] AS name,[quantityAllow],[quantityMax],[quantityMin],[unit],[buyDate],[expirationDate],S.SupplieID AS supplieID,S.name AS supplieName, I.price  FROM Ingredient I INNER JOIN Supplie S ON S.SupplieID = I.SupplieID",
+    getIngredient: "SELECT I.[IngredientID] as ingredientID, I.[name] AS name,[quantityAllow],[quantityMax],[quantityMin],[unit],[buyDate],[expirationDate],S.SupplieID AS supplieID,S.name AS supplieName, I.price  FROM Ingredient I INNER JOIN Supplie S ON S.SupplieID = I.SupplieID WHERE [IngredientID] = @ingredientID",
+    createIngredient: "INSERT INTO Ingredient([name],[quantityAllow],[quantityMax],[quantityMin],[unit],[buyDate],[expirationDate], SupplieID, price) VALUES(@name,@quantityAllow,@quantityMax,@quantityMin,@unit,@buyDate,@expirationDate, @supplieID, @price)",
+    updateIngredient: "UPDATE Ingredient SET [name] = @name,[quantityMax] = @quantityMax,[quantityMin] = @quantityMin,[unit] = @unit,[buyDate] = @buyDate,[expirationDate] = @expirationDate, SupplieID = @supplieID, price = @price   WHERE IngredientID = @ingredientID",
+    deleteIngredient: "",
+    topIngredients:"SELECT TOP (5) i.IngredientID, i.name, SUM(od.quantity) AS total_quantity FROM OrderDetail od JOIN Product p ON od.ProductID = p.ProductID JOIN Recibe r ON p.RecipeID = r.RecipeID JOIN RecibeIngredient c ON r.RecipeID = c.RecipeID JOIN Ingredient i ON c.IngredientID = i.IngredientID GROUP BY i.IngredientID, i.name ORDER BY total_quantity DESC"
+}
